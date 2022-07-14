@@ -3,9 +3,9 @@
 This project was developed to practice and develop skills with the technologies used here.
 
 ## Technologies used
-React router dom
-Formik
-Material UI
+* React router dom <br/>
+* Formik <br/>
+* Material UI
 
 ## Available Scripts
 
