@@ -15,17 +15,34 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Copyright from '../components/Copyright';
 
+import { UserContext } from '../providers/User';
+import { useContext } from 'react';
+
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+    const {
+        name,
+        setName,
+        lastName,
+        setLastName,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        checkEmail,
+        setCheckEmail,
+    } = useContext(UserContext)
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        console.log({
+        email: data.get('email'),
+        password: data.get('password'),
+        });
+    };
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,16 +73,20 @@ export default function SignUp() {
                   id="nome"
                   label="Nome"
                   autoFocus
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  id="sobrenome"
+                  id="lastName"
                   label="Sobrenome"
-                  name="sobrenome"
+                  name="lastName"
                   autoComplete="family-name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -76,23 +97,28 @@ export default function SignUp() {
                   label="E-mail"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="senha"
+                  name="password"
                   label="Senha"
                   type="password"
-                  id="senha"
+                  id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={<Checkbox checked={checkEmail} color="primary" />}
                   label="Quero receber atualizações por e-mail."
+                  onChange={(e) => setCheckEmail(e.target.checked)}
                 />
               </Grid>
             </Grid>
